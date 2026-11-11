@@ -55,7 +55,7 @@ export default{
     </div>
   </div>
   <div class="actionbox">
-    <p>He last sent a message in #general</p>
+    <p>He last sent a message in #ping-to-play</p>
   </div>
 </template>
 
