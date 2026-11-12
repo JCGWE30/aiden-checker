@@ -35,10 +35,10 @@ export default{
   },
 
   async mounted() {
-      this.data = await (await fetch("https://aiden-api.coolingloopmc.com")).json()
       this.interval = setInterval(() => {
           this.currentTime = Date.now();
       }, 1000);
+      this.data = await (await fetch("https://aiden-api.coolingloopmc.com")).json()
   },
 
   beforeUnmount() {
