@@ -2,14 +2,14 @@
 export default{
   data(){
     return{
-      timestamp: 1794352140000,
+      data: {},
       currentTime: Date.now()
     }
   },
 
   computed: {
     seconds() {
-      return Math.floor((this.currentTime - this.timestamp) / 1000);
+      return Math.floor((this.currentTime - this.data.timestamp) / 1000);
     },
     minutes() {
       return Math.floor(this.seconds / 60);
@@ -19,10 +19,23 @@ export default{
     },
     days() {
       return Math.floor(this.hours / 24);
+    },
+    status(){
+      switch(this.data.activity){
+        case "message_create":
+          return `He last sent a message in #${this.data.payload}`
+        case "message_delete":
+          return `He last deleted a message in #${this.data.payload}`
+        case "voice_join":
+          return `He last joined the "${this.data.payload}" voice channel`
+        case "voice_leave":
+          return `He last left the "${this.data.payload}" voice channel`
+      }
     }
   },
 
-  mounted() {
+  async mounted() {
+      this.data = await (await fetch("/api")).json()
       this.interval = setInterval(() => {
           this.currentTime = Date.now();
       }, 1000);
@@ -55,7 +68,7 @@ export default{
     </div>
   </div>
   <div class="actionbox">
-    <p>He last sent a message in #ping-to-play</p>
+    <p>{{ status }}</p>
   </div>
 </template>
 
