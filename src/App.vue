@@ -35,7 +35,7 @@ export default{
   },
 
   async mounted() {
-      this.data = await (await fetch("/api")).json()
+      this.data = await (await fetch("http://157.230.85.7:3000")).json()
       this.interval = setInterval(() => {
           this.currentTime = Date.now();
       }, 1000);
